@@ -1,4 +1,4 @@
-import { Navbar, Button } from "flowbite-react";
+import { Navbar, Button, NavbarLink } from "flowbite-react";
 import { HiUserCircle, HiLogout } from "react-icons/hi";
 import { NavLink, useNavigate } from "react-router-dom";
 import FormLoginUser from "../form-login-user/form-login-user.jsx";
@@ -29,53 +29,77 @@ function Header() {
 
     return (
         <>
-            <Navbar fluid rounded className={"bg-slate-800"}>
+            <Navbar fluid className={"bg-slate-800"}>
                 <NavLink to={"/"}>
                     <Navbar.Brand as={"div"}>
-                        <img src={"src/assets/img/roleta_da_picanha.jpeg"} className="mr-3 h-6 sm:h-9" alt="Probissimo Bet Logo" />
-                        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white text-white">
+                        <img src={"src/assets/img/roleta_da_picanha.jpeg"} className="mr-3 h-6 sm:h-9"
+                             alt="Probissimo Bet Logo"/>
+                        <span
+                            className="self-center whitespace-nowrap text-xl font-semibold dark:text-white text-white">
                             Probissimo Bet
                         </span>
                     </Navbar.Brand>
                 </NavLink>
-                <Navbar.Toggle />
+                <div className="flex ml-auto mx-5">
+                    {isAuthenticated && decodedToken ? (
+                        decodedToken.roles.includes('Player') ? (
+                            <WalletModal/>
+                        ) : null
+                    ) : null}
+                </div>
+                <Navbar.Toggle/>
                 <Navbar.Collapse>
                     {isAuthenticated && decodedToken ? (
                         <>
                             {decodedToken.roles.includes('Player') && (
                                 <>
-                                    <WalletModal />
                                     <NavLink to={'/user'}>
-                                        <Button color={'light'} className={'my-3 w-full'} pill>
-                                            <HiUserCircle className={'mr-2 h-5 w-5'} />
-                                            Perfil
-                                        </Button>
+                                        {/*<Button color={'light'} className={'my-3 w-full'} pill>*/}
+                                        {/*    <HiUserCircle className={'mr-2 h-5 w-5'} />*/}
+                                        {/*    Perfil*/}
+                                        {/*</Button>*/}
+                                        <NavbarLink>
+                                            <span
+                                                className={`text-white hover:cursor-pointer hover:text-gray-500`}
+                                            >
+                                                Perfil
+                                            </span>
+                                        </NavbarLink>
                                     </NavLink>
-                                    <Button color={'failure'} className={'my-3'} pill onClick={handleLogout}>
-                                        Sair
-                                        <HiLogout className={'ml-2 h-5 w-5'} />
-                                    </Button>
+                                    {/*<Button color={'failure'} className={'my-3'} pill onClick={handleLogout}>*/}
+                                    {/*    Sair*/}
+                                    {/*    <HiLogout className={'ml-2 h-5 w-5'} />*/}
+                                    {/*</Button>*/}
+                                    <NavbarLink
+                                        onClick={handleLogout}
+                                    >
+                                        <span
+                                            className={`text-white mr-16 hover:cursor-pointer hover:text-gray-500`}
+                                        >
+                                            Sair
+                                        </span>
+                                    </NavbarLink>
                                 </>
                             )}
                             {decodedToken.roles.includes('Admin') && (
                                 <>
                                     <NavLink to={'/admin'}>
                                         <Button color={'light'} className={'my-3 w-full'} pill>
-                                            <HiUserCircle className={'mr-2 h-5 w-5'} />
+                                            <HiUserCircle className={'mr-2 h-5 w-5'}/>
                                             Admin
                                         </Button>
                                     </NavLink>
                                     <Button color={'failure'} className={'my-3'} pill onClick={handleLogout}>
                                         Sair
-                                        <HiLogout className={'ml-2 h-5 w-5'} />
+                                        <HiLogout className={'ml-2 h-5 w-5'}/>
                                     </Button>
                                 </>
                             )}
                         </>
                     ) : (
                         <>
-                            <FormLoginUser />
-                            <FormCreateUser />
+                            <FormLoginUser/>
+                            <FormCreateUser/>
                         </>
                     )}
                 </Navbar.Collapse>

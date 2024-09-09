@@ -1,4 +1,4 @@
-import { Button, Modal, Alert } from "flowbite-react";
+import { Button, Modal, Alert, NavbarLink } from "flowbite-react";
 import { GiWallet } from "react-icons/gi";
 import {useEffect, useState} from "react";
 import { useForm } from "react-hook-form";
@@ -49,20 +49,22 @@ function WalletModal() {
 
     return (
         <>
-            <Button onClick={() => setOpenModal(true)} color={"success"} className={"my-3"} pill>
-                <GiWallet className={"mr-2 h-5 w-5"} />
-                {loading && <Alert>Loading...</Alert>}
-                {apiError && <Alert>{apiError}</Alert>}
+            <p onClick={() => setOpenModal(true)} color={"success"} className={"my-3"}>
+                {/*<GiWallet className={"mr-2 h-5 w-5"} />*/}
+                {loading && <span>Loading...</span>}
+                {apiError && <span>{apiError}</span>}
                 {walletData && (
-                    <span> {walletData.amount}</span>
+                    <span className={`text-white hover:text-gray-500 my-3 w-full hover:cursor-pointer`}>
+                        {walletData.amount.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                    </span>
                 )}
-            </Button>
+            </p>
 
             <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
                 <Modal.Header>Saldo:
                     {loading && <div>Loading...</div>}
                     {walletData && (
-                        <span> {walletData.amount}</span>
+                        <span>{walletData.amount.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                     )}
                 </Modal.Header>
                 <Modal.Body>
