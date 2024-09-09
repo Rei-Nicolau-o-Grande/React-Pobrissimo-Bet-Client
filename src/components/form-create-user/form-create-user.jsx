@@ -121,11 +121,12 @@ function FormCreateUser() {
                                     {...register("password",{
                                         required: true,
                                         minLength: {
-                                            value: 3,
-                                            message: "Mínimo 3 caracteres."
+                                            value: 6,
+                                            message: "Mínimo 6 caracteres."
                                         },
                                         validate: {
                                             hasUpperCase: value => /[A-Z]/.test(value) || "Deve conter pelo menos uma letra maiúscula.",
+                                            hasLowerCase: value => /[a-z]/.test(value) || "Deve conter pelo menos uma letra minúscula.",
                                             hasNumber: value => /\d/.test(value) || "Deve conter pelo menos um número."
                                         }
 
@@ -133,8 +134,9 @@ function FormCreateUser() {
                                     helperText={
                                         errors?.password?.message ||
                                         (errors?.password?.type === "required" ? 'Campo obrigatório.' : '') ||
-                                        (errors?.password?.type === "minLength" ? 'Mínimo 3 caracteres.' : '') ||
+                                        (errors?.password?.type === "minLength" ? 'Mínimo 6 caracteres.' : '') ||
                                         (errors?.password?.type === "hasUpperCase" && errors?.password?.message) ||
+                                        (errors?.password?.type === "hasLowerCase" && errors?.password?.message) ||
                                         (errors?.password?.type === "hasNumber" && errors?.password?.message)
                                     }
                                 />

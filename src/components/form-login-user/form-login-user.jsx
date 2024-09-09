@@ -60,13 +60,13 @@ function FormLoginUser() {
                             <div>
                                 <div className="mb-2 block">
                                     <Label htmlFor="email" value="Seu email"
-                                       color={`${errors.email ? 'failure' : ''}`}/>
+                                       color={`${errors.email || apiError ? 'failure' : ''}`}/>
                                 </div>
                                 <TextInput
                                     id="email"
                                     type="email"
                                     placeholder="email@email.com"
-                                    color={`${errors.email ? 'failure' : ''}`}
+                                    color={`${errors.email || apiError ? 'failure' : ''}`}
                                     {...register("email",{
                                         required: true,
                                         validate: {
@@ -82,20 +82,18 @@ function FormLoginUser() {
                             <div>
                                 <div className="mb-2 block">
                                     <Label htmlFor="password" value="Sua Senha"
-                                       color={`${errors.password ? 'failure' : ''}`}/>
+                                       color={`${errors.password || apiError ? 'failure' : ''}`}/>
                                 </div>
                                 <TextInput
                                     id="password"
                                     type="password"
                                     placeholder="********"
-                                    color={`${errors.password ? 'failure' : ''}`}
+                                    color={`${errors.password || apiError ? 'failure' : ''}`}
                                     {...register("password",{
-                                        required: true,
-                                        minLength: 3
+                                        required: true
                                     })}
                                     helperText={
-                                        errors?.password?.type === "required" ? 'Campo obrigatório.' : '' ||
-                                        errors?.password?.type === "minLength" ? 'Mínimo 3 caracteres.' : ''
+                                        errors?.password?.type === "required" ? 'Campo obrigatório.' : ''
                                     }
                                 />
                             </div>
@@ -109,7 +107,7 @@ function FormLoginUser() {
                                 </a>
                             </div>
                             <div className="w-full">
-                                <Button type={"submit"} disabled={Object.keys(errors).length > 0}>Login</Button>
+                                <Button type={"submit"}>Login</Button>
                             </div>
                             <div className="flex justify-between text-sm font-medium text-gray-500 dark:text-gray-300">
                                 Not registered?&nbsp;

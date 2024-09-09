@@ -148,16 +148,18 @@ function FormUpdateUser({ openModal, setOpenModal, userData, onCloseModal }) {
                                     color={`${errors.password ? 'failure' : ''}`}
                                     {...register("password",{
                                         validate: {
-                                            minLength: (value) => value.length === 0 || value.length >= 3 || "Mínimo 3 caracteres.",
+                                            minLength: (value) => value.length === 0 || value.length >= 6 || "Mínimo 6 caracteres.",
                                             hasUpperCase: (value) => value.length === 0 || /[A-Z]/.test(value) || "Deve conter pelo menos uma letra maiúscula.",
+                                            hasLowerCase: (value) => value.length === 0 || /[a-z]/.test(value) || "Deve conter pelo menos uma letra minúscula.",
                                             hasNumber: (value) => value.length === 0 || /\d/.test(value) || "Deve conter pelo menos um número."
                                         }
 
                                     })}
                                     helperText={
                                         errors?.password?.message ||
-                                        (errors?.password?.type === "minLength" ? 'Mínimo 3 caracteres.' : '') ||
+                                        (errors?.password?.type === "minLength" && errors?.password?.message) ||
                                         (errors?.password?.type === "hasUpperCase" && errors?.password?.message) ||
+                                        (errors?.password?.type === "hasLowerCase" && errors?.password?.message) ||
                                         (errors?.password?.type === "hasNumber" && errors?.password?.message)
                                     }
                                 />
