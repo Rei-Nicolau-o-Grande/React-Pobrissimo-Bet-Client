@@ -1,9 +1,9 @@
 import {Alert, Button, Label, TextInput} from "flowbite-react";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { useForm } from "react-hook-form";
-import validator from "validator";
 import axiosInstance from "../../helper/axios-instance.js";
 import {useCookies} from "react-cookie";
+import { maskMoneyDisplay, unmaskMoney } from "../../helper/mask.js";
 
 
 function FormTransactionWithDraw({walletData, setOpenModal, fetchWalletData}) {
@@ -11,7 +11,9 @@ function FormTransactionWithDraw({walletData, setOpenModal, fetchWalletData}) {
         register,
         handleSubmit,
         formState: { errors },
-        reset
+        reset,
+        watch,
+        setValue
     } = useForm();
     const [data, setData] = useState(null);
     const [apiError, setApiError] = useState(null);
@@ -22,8 +24,13 @@ function FormTransactionWithDraw({walletData, setOpenModal, fetchWalletData}) {
         setLoading(true);
         setApiError(null);
 
+        const formattedData = {
+            ...formData,
+            value: unmaskMoney(formData.value)
+        };
+
         if (cookies.accessToken && confirm("Você deseja sacar ?")) {
-            await axiosInstance.post(`/transactions/withdraw/${walletData.id}`, formData, {
+            await axiosInstance.post(`/transactions/withdraw/${walletData.id}`, formattedData, {
                 headers: {
                     Authorization: `Bearer ${cookies.accessToken}`
                 }
@@ -38,7 +45,7 @@ function FormTransactionWithDraw({walletData, setOpenModal, fetchWalletData}) {
                 )
                 .catch(
                     error => {
-                        setApiError(error.response.data.message);
+                        setApiError(error.response.data);
                         setLoading(false);
                     }
                 );
@@ -54,25 +61,37 @@ function FormTransactionWithDraw({walletData, setOpenModal, fetchWalletData}) {
         reset();
     }
 
+    const value = watch("value");
+
+    useEffect(() => {
+        setValue("value", maskMoneyDisplay(value));
+    }, [value]);
+
     return (
         <form className="flex max-w-md flex-col gap-4" onSubmit={handleSubmit(onSubmitTransactionWithDraw)}>
             {loading && <Alert color={"cyan"}>Loading...</Alert>}
-            {apiError && <Alert color={"failure"}>{apiError}</Alert>}
+            {apiError && <Alert color={"failure"}>{apiError.message}</Alert>}
             <div>
                 <div className="mb-2 block">
                     <Label htmlFor="WithDraw" value="Valor" />
                 </div>
                 <TextInput
                     id="WithDraw"
-                    type="number"
+                    type="text"
+                    autoComplete="off"
                     placeholder="0.00"
-                    color={`${errors.value ? 'failure' : ''}`}
+                    color={`${errors?.value || apiError?.errorFields?.value ? 'failure' : ''}`}
+                    value={maskMoneyDisplay(value)}
                     {...register("value", {
                         required: "Campo obrigatório",
-                        validate: value => validator.isFloat(value) || "Valor inválido"
+                        onChange: (e) => setValue('value', maskMoneyDisplay(e.target.value))
                     })}
                     helperText={
-                        errors.value && errors.value.message
+                        errors?.value?.message ??
+                        (apiError?.errorFields?.value?.length > 0 ?
+                                apiError.errorFields.value.join(', ') :
+                                ''
+                        )
                     }
                 />
             </div>
