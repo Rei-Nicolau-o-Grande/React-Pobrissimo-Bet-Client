@@ -1,7 +1,6 @@
-import { Button, Modal, Alert, NavbarLink } from "flowbite-react";
-import { GiWallet } from "react-icons/gi";
+import {Modal} from "flowbite-react";
 import {useEffect, useState} from "react";
-import { useForm } from "react-hook-form";
+import {useForm} from "react-hook-form";
 import Transaction from "../transaction/transaction.jsx";
 import {useCookies} from "react-cookie";
 import axiosInstance from "../../helper/axios-instance.js";
@@ -50,7 +49,6 @@ function WalletModal() {
     return (
         <>
             <p onClick={() => setOpenModal(true)} color={"success"} className={"my-3"}>
-                {/*<GiWallet className={"mr-2 h-5 w-5"} />*/}
                 {loading && <span>Loading...</span>}
                 {apiError && <span>{apiError}</span>}
                 {walletData && (
@@ -63,7 +61,7 @@ function WalletModal() {
             <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
                 <Modal.Header>Saldo:
                     {loading && <div>Loading...</div>}
-                    {walletData && (
+                    { walletData && (
                         <span>{walletData.amount.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                     )}
                 </Modal.Header>

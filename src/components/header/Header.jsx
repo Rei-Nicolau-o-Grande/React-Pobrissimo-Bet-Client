@@ -1,6 +1,6 @@
 import { Navbar, Button, NavbarLink } from "flowbite-react";
 import { HiUserCircle, HiLogout } from "react-icons/hi";
-import { NavLink, useNavigate } from "react-router-dom";
+import {Link, NavLink, useNavigate} from "react-router-dom";
 import FormLoginUser from "../form-login-user/form-login-user.jsx";
 import FormCreateUser from "../form-create-user/form-create-user.jsx";
 import { useCookies } from "react-cookie";
@@ -48,33 +48,23 @@ function Header() {
                     ) : null}
                 </div>
                 <Navbar.Toggle/>
-                <Navbar.Collapse>
+                <Navbar.Collapse className={'mr-16'}>
                     {isAuthenticated && decodedToken ? (
                         <>
                             {decodedToken.roles.includes('Player') && (
                                 <>
-                                    <NavLink to={'/user'}>
-                                        {/*<Button color={'light'} className={'my-3 w-full'} pill>*/}
-                                        {/*    <HiUserCircle className={'mr-2 h-5 w-5'} />*/}
-                                        {/*    Perfil*/}
-                                        {/*</Button>*/}
-                                        <NavbarLink>
-                                            <span
-                                                className={`text-white hover:cursor-pointer hover:text-gray-500`}
-                                            >
-                                                Perfil
-                                            </span>
-                                        </NavbarLink>
-                                    </NavLink>
-                                    {/*<Button color={'failure'} className={'my-3'} pill onClick={handleLogout}>*/}
-                                    {/*    Sair*/}
-                                    {/*    <HiLogout className={'ml-2 h-5 w-5'} />*/}
-                                    {/*</Button>*/}
+                                    <NavbarLink as={Link} to="/user">
+                                        <span
+                                            className={`text-white hover:cursor-pointer hover:text-gray-500`}
+                                        >
+                                            Perfil
+                                        </span>
+                                    </NavbarLink>
                                     <NavbarLink
                                         onClick={handleLogout}
                                     >
                                         <span
-                                            className={`text-white mr-16 hover:cursor-pointer hover:text-gray-500`}
+                                            className={`text-white hover:cursor-pointer hover:text-gray-500`}
                                         >
                                             Sair
                                         </span>
@@ -83,12 +73,12 @@ function Header() {
                             )}
                             {decodedToken.roles.includes('Admin') && (
                                 <>
-                                    <NavLink to={'/admin'}>
+                                    <NavbarLink as={Link} to="/admin">
                                         <Button color={'light'} className={'my-3 w-full'} pill>
                                             <HiUserCircle className={'mr-2 h-5 w-5'}/>
                                             Admin
                                         </Button>
-                                    </NavLink>
+                                    </NavbarLink>
                                     <Button color={'failure'} className={'my-3'} pill onClick={handleLogout}>
                                         Sair
                                         <HiLogout className={'ml-2 h-5 w-5'}/>
