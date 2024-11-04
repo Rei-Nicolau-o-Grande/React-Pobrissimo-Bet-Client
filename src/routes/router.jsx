@@ -3,6 +3,8 @@ import Home from "../pages/home/Home.jsx";
 import User from "../pages/user/User.jsx";
 import ProtectedRoutes from "../helper/protected-routes.jsx";
 import Admin from "../pages/admin/Admin.jsx";
+import {RoletaPicanha} from "../pages/game/roleta_da_picanha/RoletaPicanha.jsx";
+import {Burrinho} from "../pages/game/burrinho/Burrinho.jsx";
 
 const router = createBrowserRouter([
     {
@@ -15,6 +17,14 @@ const router = createBrowserRouter([
             {
                 path: "/user",
                 element: <User/>
+            },
+            {
+                path: "/game/roleta-da-picanha",
+                element: <RoletaPicanha/>,
+            },
+            {
+                path: "/game/burrinho",
+                element: <Burrinho/>,
             }
         ]
     },
