@@ -1,4 +1,4 @@
-export function Game() {
+export function GameRoletaPicanha() {
     return (
         <>
             <div className="grid grid-cols-12">
