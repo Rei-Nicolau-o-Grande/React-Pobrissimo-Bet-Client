@@ -7,7 +7,7 @@ import {useForm} from "react-hook-form";
 import {maskMoneyDisplay, unmaskMoney} from "../../../../helper/mask.js";
 import {useWallet} from "../../../../helper/WalletContext.jsx";
 
-const symbols = ["🍒", "🍋", "🔔", "💎", "🍀", "🫏", "💩", "🐒", "🥩", "🍺", "🚀", "🗿", "🖕"];
+const symbols = ["🍒", "🍋", "🔔", "💎", "🍀", "🫏", "💩", "🐒", "🥩", "🖕", "❤️"];
 
 export function GameBurrinho() {
     const {
@@ -19,7 +19,7 @@ export function GameBurrinho() {
         setValue
     } = useForm();
     const [reels, setReels] = useState(Array(5).fill(Array(3).fill('?')));
-    const [bet, setBet] = useState('');
+    const [multiplier, setMultiplier] = useState('');
     const [win, setWin] = useState(null);
     const [spinning, setSpinning] = useState(false);
     const [apiError, setApiError] = useState(true);
@@ -43,7 +43,7 @@ export function GameBurrinho() {
                 }
             });
 
-            setBet(response.data.bet);
+            setMultiplier(response.data.multiplier);
 
             if (response.data && Array.isArray(response.data.reels)) {
                 const finalSymbols = response.data.reels;
@@ -166,7 +166,7 @@ export function GameBurrinho() {
                         </div>
                     )}
                     <div className="result">
-                        {!spinning && win !== null && (win ? `Você ganhou x${bet}!` : 'Perdeu faz o 🇱')}
+                        {!spinning && win !== null && (win ? `Você ganhou x${multiplier}!` : 'Perdeu faz o 🇱')}
                     </div>
                 </div>
             </section>
