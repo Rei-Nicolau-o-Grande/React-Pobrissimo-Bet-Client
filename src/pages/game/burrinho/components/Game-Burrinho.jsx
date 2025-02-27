@@ -22,14 +22,13 @@ export function GameBurrinho() {
     const [multiplier, setMultiplier] = useState('');
     const [win, setWin] = useState(null);
     const [spinning, setSpinning] = useState(false);
-    const [apiError, setApiError] = useState(true);
+    const [apiError, setApiError] = useState();
     const [cookies] = useCookies(["accessToken"]);
 
     const { walletData, fetchWalletData } = useWallet();
 
     const spinReels = async (formAmountBet) => {
         setSpinning(true);
-        setApiError(true);
 
         const formattedData = {
             ...formAmountBet,
@@ -77,7 +76,6 @@ export function GameBurrinho() {
                             )
                         );
 
-                        // if (index === reels.length - 1) setSpinning(false);
                         if (index === reels.length - 1) {
                             setSpinning(false);
                             setWin(response.data.win);
@@ -93,7 +91,8 @@ export function GameBurrinho() {
             console.error("Erro ao girar os rolos:", error);
             setSpinning(false);
             setWin(false);
-            setApiError(error.response?.data.errorFields.value);
+            const apiMessage = error.response?.data?.errorFields?.value || error.response?.data?.message || 'Erro ao girar os rolos';
+            setApiError(apiMessage);
         }
     };
 
@@ -142,7 +141,7 @@ export function GameBurrinho() {
                                 required: "Campo obrigatório",
                                 onChange: (e) => setValue('value', maskMoneyDisplay(e.target.value)),
                             })}
-                            color={`${errors?.value || apiError?.errorFields?.value ? 'failure' : ''}`}
+                            color={`${errors?.value || apiError ? 'failure' : ''}`}
 
                             helperText={
                                 errors?.value?.message ??
@@ -152,6 +151,11 @@ export function GameBurrinho() {
                                 )
                             }
                         />
+                        {{ apiError } && (
+                            <div className="error text-red-500 mt-3">
+                                {apiError}
+                            </div>
+                        )}
                         <button
                             type={"submit"}
                             className="bg-green-500 py-3 px-3 text-white mt-4 rounded"
@@ -160,13 +164,8 @@ export function GameBurrinho() {
                             {spinning ? 'Girando...' : 'Gire'}
                         </button>
                     </form>
-                    {{ apiError } && (
-                        <div className="error">
-                            {apiError}
-                        </div>
-                    )}
                     <div className="result">
-                        {!spinning && win !== null && (win ? `Você ganhou x${multiplier}!` : 'Perdeu faz o 🇱')}
+                        {!spinning && win !== null && (win ? `Você ganhou x${multiplier}!` : 'Perdeu faz o L')}
                     </div>
                 </div>
             </section>
