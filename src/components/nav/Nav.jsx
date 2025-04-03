@@ -8,12 +8,12 @@ function Nav() {
                 <Sidebar.ItemGroup>
                     <Sidebar.Item as="div">
                         <NavLink
-                            to="/game/roleta-da-picanha"
+                            to="/game/roda-roda-picanha"
                             className={({ isActive }) =>
                                 isActive ? "text-black bg-gray-200 rounded-full" : "text-gray-900"
                             }
                         >
-                            Roleta da picanha 🥩
+                            Roda Roda Picanha 🥩
                         </NavLink>
                     </Sidebar.Item>
                     <Sidebar.Item as="div">
@@ -23,7 +23,7 @@ function Nav() {
                                 isActive ? "text-black bg-gray-200 rounded-full" : "text-gray-900"
                             }
                         >
-                            Burrinho 🫏
+                            Burrinho Fortune 🫏
                         </NavLink>
                     </Sidebar.Item>
                 </Sidebar.ItemGroup>

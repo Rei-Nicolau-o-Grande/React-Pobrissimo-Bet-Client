@@ -3,7 +3,7 @@ import Home from "../pages/home/Home.jsx";
 import User from "../pages/user/User.jsx";
 import ProtectedRoutes from "../helper/protected-routes.jsx";
 import Admin from "../pages/admin/Admin.jsx";
-import {RoletaPicanha} from "../pages/game/roleta_da_picanha/RoletaPicanha.jsx";
+import {RoletaPicanha} from "../pages/game/roda_roda_picanha/RoletaPicanha.jsx";
 import {Burrinho} from "../pages/game/burrinho/Burrinho.jsx";
 
 const router = createBrowserRouter([
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
                 element: <User/>
             },
             {
-                path: "/game/roleta-da-picanha",
+                path: "/game/roda-roda-picanha",
                 element: <RoletaPicanha/>,
             },
             {

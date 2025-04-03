@@ -3,7 +3,6 @@ import Nav from "../../../components/nav/Nav.jsx";
 import NavMobile from "../../../components/mobile/nav-mobile.jsx";
 import Footer from "../../../components/footer/Footer.jsx";
 import {GameBurrinho} from "./components/Game-Burrinho.jsx";
-import WalletModal from "../../../components/wallet-modal/wallet-modal.jsx";
 
 export function Burrinho() {
 
@@ -25,9 +24,8 @@ export function Burrinho() {
                 </div>
 
                 <section className="col-span-12 md:col-span-8 py-3 px-3">
-                    <h1 className={`text-4xl text-center`}>Burrinho 🫏</h1>
+                    <h1 className={`text-4xl text-center`}>Burrinho Fortune 🫏</h1>
                     <GameBurrinho />
-                    <WalletModal />
                 </section>
             </div>
 

@@ -1,7 +1,6 @@
 import Header from "../../../components/header/Header.jsx";
 import Nav from "../../../components/nav/Nav.jsx";
 import NavMobile from "../../../components/mobile/nav-mobile.jsx";
-import Content from "../../../components/content/Content.jsx";
 import Footer from "../../../components/footer/Footer.jsx";
 import {GameRoletaPicanha} from "./components/Game-Roleta-Picanha.jsx";
 
@@ -24,7 +23,7 @@ export function RoletaPicanha() {
                 </div>
 
                 <section className="col-span-12 md:col-span-8 py-3 px-3">
-                    <h1 className={`text-4xl text-center`}>Roleta da Picanha 🥩</h1>
+                    <h1 className={`text-4xl text-center`}>Roda Roda Picanha 🥩</h1>
                     <GameRoletaPicanha/>
                 </section>
             </div>
