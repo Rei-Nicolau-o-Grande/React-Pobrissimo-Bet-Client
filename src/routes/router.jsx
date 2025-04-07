@@ -23,7 +23,7 @@ const router = createBrowserRouter([
                 element: <RoletaPicanha/>,
             },
             {
-                path: "/game/burrinho",
+                path: "/game/burrinho-fortune",
                 element: <Burrinho/>,
             }
         ]

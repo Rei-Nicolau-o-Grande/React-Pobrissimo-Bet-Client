@@ -15,7 +15,7 @@ function NavMobile() {
             </div>
             <div className={`py-5 px-3`}>
                 <Tooltip content="Burrinho 🫏">
-                    <NavLink to={"/game/burrinho"}>
+                    <NavLink to={"/game/burrinho-fortune"}>
                         <Avatar img={"/src/assets/img/burrinho.jpeg"} placeholderInitials="" rounded
                                 className={"w-20"}/>
                     </NavLink>

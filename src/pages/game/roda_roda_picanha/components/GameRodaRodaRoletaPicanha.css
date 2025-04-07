@@ -1,0 +1,94 @@
+.roleta-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.roleta-wrapper {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+.roleta-canvas {
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.wheel-marker {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.marker-triangle {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 24px solid #ff0000;
+}
+
+.bet-form {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.error {
+    color: #d32f2f;
+    font-size: 0.875rem;
+    margin-top: 5px;
+}
+
+.spin-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.spin-button:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+.spin-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.result {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.win {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.lose {
+    color: #d32f2f;
+    font-weight: bold;
+}

@@ -18,7 +18,7 @@ function Nav() {
                     </Sidebar.Item>
                     <Sidebar.Item as="div">
                         <NavLink
-                            to="/game/burrinho"
+                            to="/game/burrinho-fortune"
                             className={({ isActive }) =>
                                 isActive ? "text-black bg-gray-200 rounded-full" : "text-gray-900"
                             }
