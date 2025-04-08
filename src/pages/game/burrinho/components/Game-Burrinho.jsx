@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
-import { useCookies } from "react-cookie";
+import {useEffect, useRef, useState} from "react";
+import {useCookies} from "react-cookie";
 import axiosInstance from "../../../../helper/axios-instance.js";
-import { useForm } from "react-hook-form";
-import { maskMoneyDisplay, unmaskMoney } from "../../../../helper/mask.js";
-import { useWallet } from "../../../../helper/WalletContext.jsx";
-import {TextInput} from "flowbite-react";
+import {useForm} from "react-hook-form";
+import {maskMoneyDisplay, unmaskMoney} from "../../../../helper/mask.js";
+import {useWallet} from "../../../../helper/WalletContext.jsx";
 
 const symbols = ["🍒", "🍋", "🔔", "💎", "🍀", "🫏", "💩", "🐒", "🥩", "🖕", "❤️"];
 
@@ -58,7 +57,7 @@ export function GameBurrinho() {
     };
 
     const drawSymbol = (ctx, symbol, reelIndex, y) => {
-        ctx.font = "48px Arial";
+        ctx.font = "45px 'Segoe UI Emoji'";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(symbol, reelIndex * 100 + 50, y + SYMBOL_HEIGHT / 2);

@@ -1,10 +1,9 @@
-import { useEffect, useState, useRef } from "react";
-import { useForm } from "react-hook-form";
-import { useCookies } from "react-cookie";
-import { useWallet } from "../../../../helper/WalletContext.jsx";
-import { maskMoneyDisplay, unmaskMoney } from "../../../../helper/mask.js";
+import {useEffect, useRef, useState} from "react";
+import {useForm} from "react-hook-form";
+import {useCookies} from "react-cookie";
+import {useWallet} from "../../../../helper/WalletContext.jsx";
+import {maskMoneyDisplay, unmaskMoney} from "../../../../helper/mask.js";
 import axiosInstance from "../../../../helper/axios-instance.js";
-import { TextInput } from "flowbite-react";
 import "./GameRodaRodaRoletaPicanha.css";
 
 export function GameRoletaPicanha() {
@@ -14,7 +13,7 @@ export function GameRoletaPicanha() {
     const [win, setWin] = useState(null);
     const [apiError, setApiError] = useState();
     const [cookies] = useCookies(["accessToken"]);
-    const [wheel, setWheel] = useState(Array(11).fill("?"));
+    const [wheel, setWheel] = useState(Array(15).fill("?"));
     const [resultado, setResultado] = useState(null);
     const [rotationAngle, setRotationAngle] = useState(0);
     const rotationAngleRef = useRef(0);
@@ -40,11 +39,12 @@ export function GameRoletaPicanha() {
         wheelData.forEach((item, index) => {
             const startAngle = rotationAngleRef.current + index * segmentAngle;
             const endAngle = startAngle + segmentAngle;
+            const colors = ["#ba1e4a", "#63203d", "#361f2d"];
 
             ctx.beginPath();
             ctx.moveTo(canvas.width / 2, canvas.height / 2);
             ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2, startAngle, endAngle);
-            ctx.fillStyle = index % 2 === 0 ? "#f9c74f" : "#90be6d";
+            ctx.fillStyle = colors[index % 3];
             ctx.fill();
             ctx.stroke();
 
@@ -52,15 +52,13 @@ export function GameRoletaPicanha() {
             const angle = startAngle + segmentAngle / 2;
             const x = canvas.width / 2 + Math.cos(angle) * canvas.width / 3;
             const y = canvas.height / 2 + Math.sin(angle) * canvas.height / 3;
-            ctx.font = "28px sans-serif";
+            ctx.font = "45px 'Segoe UI Emoji'";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillStyle = "#000";
             ctx.fillText(item, x, y);
         });
     };
-
-
 
     useEffect(() => {
         drawWheel();
@@ -95,7 +93,7 @@ export function GameRoletaPicanha() {
             const numSegments = wheelFromAPI.length;
             const segmentAngle = (2 * Math.PI) / numSegments;
             const markerAngle = 3 * Math.PI / 2; // topo
-            const targetIndex = 5; // fixo para exemplo
+            const targetIndex = 7; // fixo para exemplo
             let targetAngle = markerAngle - (targetIndex * segmentAngle) - (segmentAngle / 2);
             if (targetAngle < 0) targetAngle += 2 * Math.PI;
 
@@ -151,9 +149,14 @@ export function GameRoletaPicanha() {
             <section className="col-span-12 py-3 px-3">
                 <div className="roleta-container">
 
-                    <div className="roleta-wrapper">
+                    <div className="roleta-wrapper flex justify-center items-center">
                         {renderMarker()}
-                        <canvas ref={canvasRef} width={300} height={300} className="roleta-canvas" />
+                        <canvas
+                            ref={canvasRef}
+                            width={450}
+                            height={450}
+                            className="roleta-canvas max-w-full h-auto"
+                        />
                     </div>
 
                     {!spinning && win !== null && (
