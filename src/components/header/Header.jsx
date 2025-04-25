@@ -6,6 +6,7 @@ import FormCreateUser from "../form-create-user/form-create-user.jsx";
 import { useCookies } from "react-cookie";
 import WalletModal from "../wallet-modal/wallet-modal.jsx";
 import { jwtDecode } from "jwt-decode";
+import roletaPicanha from "../../assets/img/roleta_da_picanha.jpeg"
 
 function Header() {
 
@@ -32,7 +33,7 @@ function Header() {
             <Navbar fluid className={"bg-slate-800"}>
                 <NavLink to={"/"}>
                     <Navbar.Brand as={"div"}>
-                        <img src={"/src/assets/img/roleta_da_picanha.jpeg"} className="mr-3 h-6 sm:h-9"
+                        <img src={roletaPicanha} className="mr-3 h-6 sm:h-9"
                              alt="Probissimo Bet Logo"/>
                         <span
                             className="self-center whitespace-nowrap text-xl font-semibold dark:text-white text-white">
