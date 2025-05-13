@@ -3,6 +3,7 @@ import Nav from "../../../components/nav/Nav.jsx";
 import NavMobile from "../../../components/mobile/nav-mobile.jsx";
 import Footer from "../../../components/footer/Footer.jsx";
 import {GameRoletaPicanha} from "./components/Game-Roleta-Picanha.jsx";
+import {TableResultGameRodaRodaPicanha} from "./components/table-result-game-roda-roda-picanha.jsx";
 
 export function RoletaPicanha() {
     return (
@@ -25,6 +26,7 @@ export function RoletaPicanha() {
                 <section className="col-span-12 md:col-span-8 py-3 px-3">
                     <h1 className={`text-4xl text-center`}>Roda Roda Picanha 🥩</h1>
                     <GameRoletaPicanha/>
+                    <TableResultGameRodaRodaPicanha />
                 </section>
             </div>
 

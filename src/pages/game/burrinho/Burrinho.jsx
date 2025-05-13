@@ -2,10 +2,10 @@ import Header from "../../../components/header/Header.jsx";
 import Nav from "../../../components/nav/Nav.jsx";
 import NavMobile from "../../../components/mobile/nav-mobile.jsx";
 import Footer from "../../../components/footer/Footer.jsx";
-import {GameBurrinho} from "./components/Game-Burrinho.jsx";
+import { GameBurrinho } from "./components/Game-Burrinho.jsx";
+import { TableResultGameBurrinhoFortune } from "./components/table-result-game-burrinho-fortune.jsx";
 
 export function Burrinho() {
-
     return (
         <>
             <header>
@@ -26,12 +26,13 @@ export function Burrinho() {
                 <section className="col-span-12 md:col-span-8 py-3 px-3">
                     <h1 className={`text-4xl text-center`}>Burrinho Fortune 🫏</h1>
                     <GameBurrinho />
+                    <TableResultGameBurrinhoFortune />
                 </section>
             </div>
 
             <footer>
-                <Footer/>
+                <Footer />
             </footer>
         </>
-    )
+    );
 }
